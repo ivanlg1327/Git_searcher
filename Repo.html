@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fire</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script type="text/javascript">
+      $(document).ready(function(){
+          var reset=0;
+          $("#confirm").click(function(){
+              document.getElementById("demo").innerHTML ="The repositories from "+ $("#usr").val()+ " are";
+
+              if(reset==1){
+                  $("#Tabla").empty();
+                  reset=0;
+              }
+              $.get("https://api.github.com/users/" + $("#usr").val()+ "/repos", function(data, status){
+                  for (var i = 0; i < data.length; i++) {
+                      $("Table").append("<tr><td>" + data[i].name + "</td><td>" + data[i].description + "</td><td>" + data[i].stargazers_count + "</td></tr>");
+                      reset=1;
+                  }
+
+              });
+          });
+
+      });
+  </script>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td, th {
+      border: 3px solid #292add;
+      text-align: left;
+      padding: 10px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #15737f;
+    }
+  </style>
+</head>
+<body>
+<div class="jumbotron text-center">
+  <h1>Repository counter</h1>
+  <p>This page shows all the repositories from a user, and a brief description</p>
+</div>
+
+<div class="container">
+  <form>
+    <div class="form-group">
+      <label for="usr">Name:</label>
+      <input type="text" class="form-control" id="usr">
+    </div>
+    <div class="form-group">
+      <button  type="button" class="btn btn-primary btn-block" id="confirm">OK</button>
+    </div>
+    <div class="form-group text-center">
+
+       <h2 id="demo"></h2>
+      <table id="Tabla">
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Followers</th>
+        </tr>
+        <tr>
+
+        </tr>
+      </table>
+      <h2 id="demo2"></h2>
+    </div>
+  </form>
+
+
+</div>
+
+</body>
+</html>
