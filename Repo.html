@@ -17,7 +17,7 @@
               }
               $.get("https://api.github.com/users/" + $("#usr").val()+ "/repos", function(data, status){
                   for (var i = 0; i < data.length; i++) {
-                      $("Table").append("<tr><td>" + data[i].name + "</td><td>" + data[i].description + "</td><td>" + data[i].stargazers_count + "</td></tr>");
+                      $("#Tabla").append("<tr><td>" + data[i].name + "</td><td>" + data[i].description + "</td><td>" + data[i].stargazers_count + "</td></tr>");
                       reset=1;
                   }
 
