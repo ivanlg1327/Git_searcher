@@ -12,12 +12,12 @@
               document.getElementById("demo").innerHTML ="The repositories from "+ $("#usr").val()+ " are";
 
               if(reset==1){
-                  $("#Tabla").empty();
+                  $("#cont").empty();
                   reset=0;
               }
               $.get("https://api.github.com/users/" + $("#usr").val()+ "/repos", function(data, status){
                   for (var i = 0; i < data.length; i++) {
-                      $("#Tabla").append("<tr><td>" + data[i].name + "</td><td>" + data[i].description + "</td><td>" + data[i].stargazers_count + "</td></tr>");
+                      $("#cont").append("<tr><td>" + data[i].name + "</td><td>" + data[i].description + "</td><td>" + data[i].stargazers_count + "</td></tr>");
                       reset=1;
                   }
 
@@ -63,14 +63,18 @@
 
        <h2 id="demo"></h2>
       <table id="Tabla">
+        <thead>
         <tr>
           <th>Name</th>
           <th>Description</th>
           <th>Followers</th>
         </tr>
+        </thead>
+        <tbody id="cont">
         <tr>
 
         </tr>
+        </tbody>
       </table>
       <h2 id="demo2"></h2>
     </div>
